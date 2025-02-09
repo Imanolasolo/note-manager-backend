@@ -2,6 +2,7 @@ from rest_framework import status, permissions, generics, viewsets
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 from .models import Note
 from .serializers import NoteSerializer, UserSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -22,6 +23,9 @@ class RegisterUserView(generics.CreateAPIView):
                 {"error": "Username already taken"},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+        # Hash the password before saving the user
+        serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
 
         # If the username is unique, save the user
         user = serializer.save()
