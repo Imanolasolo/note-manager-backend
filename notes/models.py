@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.contrib.auth import get_user_model
 
+# Custom user manager to handle user creation
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -17,6 +18,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, password, **extra_fields)
 
+# Custom user model
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
@@ -30,6 +32,7 @@ class CustomUser(AbstractBaseUser):
     def __str__(self):
         return self.email
 
+# Note model to store notes
 class Note(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()

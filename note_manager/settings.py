@@ -65,13 +65,13 @@ REST_FRAMEWORK = {
 }
 
 
-# Permitir todas las solicitudes de orígenes cruzados (CORS)
+# Allow all cross origins requests(CORS)
 CORS_ALLOW_ALL_ORIGINS = True
 
-# O especificar los orígenes permitidos (mejor para producción)
+# O especificar los orígenes permitidos (mejor para producción)Or specify the allowed origins (better for production)
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Si tu frontend está corriendo en el puerto 3000
-    "http://127.0.0.1:8000",  # Si también usas localhost para el backend
+    "http://localhost:3000",  # If your frontend is running on 3000 port
+    "http://127.0.0.1:8000",  # If you also use localhost for backend
 ]
 
 ROOT_URLCONF = 'note_manager.urls'
